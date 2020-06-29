@@ -1,5 +1,5 @@
-from abc import *
 from random import *
+from inputview import InputView
 
 
 class Answer:
@@ -16,8 +16,12 @@ class Answer:
             return False
         return True
 
-    def is_equal(self, answer):
-        return self._answer == answer.get_answer
+    def is_equal(self, target):
+        submitted = target.get_answer()
+        for i in range(self._LENGTH):
+            if self._answer[i] != submitted[i]:
+                return False
+        return True
 
     def get_ball_count(self, answer):
         res = 0
@@ -52,7 +56,7 @@ class UserAnswer(Answer):
         super().__init__()
         temp_answer = ""
         while not self._is_valid(temp_answer):
-            temp_answer = input()
+            temp_answer = InputView.input_user_answer()
         for num in temp_answer:
             self._answer.append(int(num))
 

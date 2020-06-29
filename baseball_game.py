@@ -6,8 +6,12 @@ class BaseBallGame:
 
     @staticmethod
     def start():
-        score = Score(ComAnswer(), UserAnswer())
-        score.announce()
+        correct_answer = ComAnswer()
+        submitted_answer = UserAnswer()
+        score = Score(correct_answer, submitted_answer)
+        while not score.is_perfect():
+            submitted_answer = UserAnswer()
+            score = Score(correct_answer, submitted_answer)
 
 
 if __name__ == "__main__":
